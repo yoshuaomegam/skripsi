@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\DesaModel;
 use Illuminate\Support\Facades\Auth;
 use App\PelaporanModel;
+use App\PerencanaanModel;
+use App\DetailPerencanaanModel;
 class PerencanaanController extends Controller
 {
     /**
@@ -24,9 +26,10 @@ class PerencanaanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $data=PelaporanModel::find($id);
+        return view('perencanaan/tambahperencanaan',compact('data'));
     }
 
     /**
@@ -35,9 +38,26 @@ class PerencanaanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, Request $request)
     {
-        //
+        $data= new PerencanaanModel;
+        $total=str_replace(".", "", $request->total_penerimaan);
+        $data->id_pelaporan=$id;
+        $data->total_penerimaan=$total;
+        $data->sumber=$request->sumber;
+        $data->save();
+        for ($i=0; $i < count($request->nama); $i++) { 
+          $data2=new DetailPerencanaanModel;
+          $dana[]=str_replace(".", "", $request->perencanaan[$i]);
+          $data2->id_perencanaan=$data->id;
+          $data2->nama=$request->nama[$i];
+          $data2->perencanaan=$dana[$i];
+          $data2->tipe=$request->tipe[$i];
+          $data2->mulai=$request->mulai[$i];
+          $data2->estimasiselesai=$request->estimasiselesai[$i];
+          $data2->save();
+          redirect('/admin/menupelaporan/$id/perencanaan');
+        }
     }
 
     /**

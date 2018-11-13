@@ -21,6 +21,7 @@ Route::get('/changePassword','HomeController@showChangePasswordForm');
 Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
 Auth::routes();
 Route::get('/cek', 'HomeController@cek')->name('cek');
+
 Route::middleware('role:operator')->group(function (){
     Route::get('/operator','OperatorController@index')->name('operatorhome');
     Route::get('/admin/pelaporan','PelaporanController@index')->name('admin.pelaporan');
@@ -32,6 +33,8 @@ Route::middleware('role:operator')->group(function (){
     Route::delete('/admin/hapuspelaporan/{id}','PelaporanController@destroy')->name('admin.pelaporan.delete');
    
     Route::get('/admin/menupelaporan/{id}/perencanaan','PerencanaanController@index')->name('admin.perencanaan');
+    Route::get('/admin/menupelaporan/{id}/perencanaan/tambahperencanaan','PerencanaanController@create')->name('admin.perencanaan.create');
+    Route::post('/admin/menupelaporan/{id}/perencanaan/simpanperencanaan','PerencanaanController@store')->name('admin.perencanaan.store');
 });
 Route::middleware('role:bappemas')->group(function (){
     Route::get('/bappemas','BappemasController@index')->name('bappemashome');
