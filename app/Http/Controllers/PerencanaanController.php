@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\PelaporanModel;
 use App\PerencanaanModel;
 use App\DetailPerencanaanModel;
+use Alert;
 class PerencanaanController extends Controller
 {
     /**
@@ -17,8 +18,19 @@ class PerencanaanController extends Controller
      */
     public function index($id)
     {
+        $total=0;
         $data=PelaporanModel::find($id);
-        return view('perencanaan/perencanaan',compact('data'));
+        $adadata=PerencanaanModel::where('id_pelaporan','=',$id)->first();
+        if(!$adadata){
+            return view('perencanaan/tambahperencanaan',compact('data'));
+        }
+        else{
+        $data2=DetailPerencanaanModel::where('id_perencanaan','=',$adadata->id)->get();
+        foreach($data2 as $index => $dana){
+            $total += $dana->perencanaan;
+        }
+        return view('perencanaan/perencanaan',compact('data','adadata','data2','total'));
+    }
     }
 
     /**
@@ -28,8 +40,7 @@ class PerencanaanController extends Controller
      */
     public function create($id)
     {
-        $data=PelaporanModel::find($id);
-        return view('perencanaan/tambahperencanaan',compact('data'));
+
     }
 
     /**
@@ -53,11 +64,10 @@ class PerencanaanController extends Controller
           $data2->nama=$request->nama[$i];
           $data2->perencanaan=$dana[$i];
           $data2->tipe=$request->tipe[$i];
-          $data2->mulai=$request->mulai[$i];
-          $data2->estimasiselesai=$request->estimasiselesai[$i];
           $data2->save();
-          redirect('/admin/menupelaporan/$id/perencanaan');
         }
+        Alert::success('Data berhasil ditambahkan', 'Sukses');
+        return redirect()->back();
     }
 
     /**
@@ -79,7 +89,9 @@ class PerencanaanController extends Controller
      */
     public function edit($id)
     {
-        //
+    //    $data=PerencanaanModel::find($id);
+    //    $data2=DetailPerencanaanModel::where('id_perencanaan','=',$id)->first();
+    //    return view('perencanaan/editperencanaan',compact('data','data2'));
     }
 
     /**
@@ -91,7 +103,12 @@ class PerencanaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data= PerencanaanModel::find($id);
+        $total=str_replace(".", "", $request->total_penerimaan);
+        $data->total_penerimaan=$total;
+        $data->sumber=$request->sumber;
+        $data->save();
+        return redirect()->back();
     }
 
     /**

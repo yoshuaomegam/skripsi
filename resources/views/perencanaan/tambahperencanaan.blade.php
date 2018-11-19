@@ -54,16 +54,6 @@
                                     <option value="Pembangunan pemanfaatan dan pemeliharaan ekonomi">Pembangunan pemanfaatan dan pemeliharaan ekonomi</option>
                                 </select>
                             </tr>
-                            <tr>
-                                <td>
-                                        <label>Tanggal Mulai Perencanaan</label>
-                                    <input type="date" name="mulai[]"  class="form-control mulai_list"></td>
-                            </tr>
-                        <tr>
-                                <td>
-                                        <label>Tanggal Estimasi Selesai Perencanaan</label>
-                                    <input type="date" name="estimasiselesai[]" class="form-control selesai_list"></td>
-                            </tr>
                         </table>               
                     </div>
         
@@ -88,7 +78,7 @@
     var i=1;  
     $('#add').click(function(){  
          i++; 
-         var html='<tbody id="hapus'+i+'"><tr class="dynamic-added"><td><label>Nama Perencanaan</label><input type="text" name="nama[]"  class="form-control name_list"></td><td></td></tr><tr id="" class="dynamic-added"><td><label>Dana Perencanaan</label><div class="input-group margin-bottom-sm"><span class="input-group-addon">Rp.</span><input type="text" id="perencanaan2" name="perencanaan[]" class="form-control perencanaan_list" ></td></div><td></td></tr><tr><td><label>Tipe Perencanaan</label><select name="tipe[]" id="tipe" class="form-control tipe-list"><option value="">Tidak ada</option><option value="Pembangunan pemanfaatan dan pemeliharaan infrastruktur dan lingkungan desa">Pembangunan pemanfaatan dan pemeliharaan infrastruktur dan lingkungan desa</option><option value="Pembangunan pemanfaatan dan pemeliharaan sarana dan prasarana kesehatan">Pembangunan pemanfaatan dan pemeliharaan sarana dan prasarana kesehatan</option><option value="Pembangunan pemanfaatan dan pemeliharaan pendidikan dan kebudayaan">Pembangunan pemanfaatan dan pemeliharaan pendidikan dan kebudayaan</option><option value="Pembangunan pemanfaatan dan pemeliharaan ekonomi">Pembangunan pemanfaatan dan pemeliharaan ekonomi</option></select><td><button type="button" name="remove" id="'+i+'" class="form-control btn btn-danger btn_remove fa fa-window-close" style="vertical-align:middle;" rowspan="5"></button></td></tr><tr><td><label>Tanggal Mulai Perencanaan</label><input type="date" name="mulai[]"  class="form-control mulai_list"></td><td></td></tr><tr><td><label>Tanggal Estimasi Selesai Perencanaan</label><input type="date" name="estimasiselesai[]" class="form-control selesai_list"></td><td></td></tr></tbody>';
+         var html='<tbody id="hapus'+i+'"><tr class="dynamic-added"><td><label>Nama Perencanaan</label><input type="text" name="nama[]"  class="form-control name_list"></td><td></td></tr><tr id="" class="dynamic-added"><td><label>Dana Perencanaan</label><div class="input-group margin-bottom-sm"><span class="input-group-addon">Rp.</span><input type="text" id="perencanaan2" name="perencanaan[]" class="form-control perencanaan_list" ></td></div><td><button type="button" name="remove" id="'+i+'" class="form-control btn btn-danger btn_remove fa fa-window-close" style="vertical-align:middle;" rowspan="5"></button></td></tr><tr><td><label>Tipe Perencanaan</label><select name="tipe[]" id="tipe" class="form-control tipe-list"><option value="">Tidak ada</option><option value="Pembangunan pemanfaatan dan pemeliharaan infrastruktur dan lingkungan desa">Pembangunan pemanfaatan dan pemeliharaan infrastruktur dan lingkungan desa</option><option value="Pembangunan pemanfaatan dan pemeliharaan sarana dan prasarana kesehatan">Pembangunan pemanfaatan dan pemeliharaan sarana dan prasarana kesehatan</option><option value="Pembangunan pemanfaatan dan pemeliharaan pendidikan dan kebudayaan">Pembangunan pemanfaatan dan pemeliharaan pendidikan dan kebudayaan</option><option value="Pembangunan pemanfaatan dan pemeliharaan ekonomi">Pembangunan pemanfaatan dan pemeliharaan ekonomi</option></select><td></td></tr></tbody>';
          $('#dynamic_field').append(html);  
          $('#perencanaan2').mask('000.000.000.000.000.000.000.000', {reverse: true});
         });  
@@ -147,5 +137,6 @@ $(document).ready(function(){
     $('#total_penerimaan').mask('000.000.000.000.000.000.000.000', {reverse: true});
 })
 </script>
+
 @stop
 

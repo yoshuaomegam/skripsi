@@ -42,7 +42,7 @@
                                                         {!! Form::close() !!}
                                                       </td>  
                                                     </tr>
-@endforeach
+                                            @endforeach
                                   </tbody>
                                           <tfoot>
                                       
@@ -69,7 +69,7 @@
 
 @section('js')
 
-<script src="{{ asset('js/sweetalert.min.js') }}"></script>
+
 <script>$(document).ready(function(){
     $('#pelaporan').dataTable( {
         "columnDefs": [
@@ -105,7 +105,7 @@
             }); 
       </script>
 
-
+      <script src="{{ asset('js/sweetalert.min.js') }}"></script>
   <!-- Include this after the sweet alert js file -->
 @include('sweet::alert')
 @stop

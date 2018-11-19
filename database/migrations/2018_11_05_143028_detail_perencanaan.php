@@ -19,9 +19,7 @@ class DetailPerencanaan extends Migration
             $table->integer('id_perencanaan')->unsigned();
             $table->string('nama');
             $table->bigInteger('perencanaan')->nullable();
-            $table->string('tipe');
-            $table->string('mulai')->nullable();
-            $table->string('estimasiselesai')->nullable();
+            $table->string('tipe')->nullable();
             $table->timestamps();
 
             $table->foreign('id_perencanaan')
@@ -39,6 +37,6 @@ class DetailPerencanaan extends Migration
      */
     public function down()
     {
-        //
+        // Schema::drop('detail_perencanaan');
     }
 }

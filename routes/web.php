@@ -35,6 +35,7 @@ Route::middleware('role:operator')->group(function (){
     Route::get('/admin/menupelaporan/{id}/perencanaan','PerencanaanController@index')->name('admin.perencanaan');
     Route::get('/admin/menupelaporan/{id}/perencanaan/tambahperencanaan','PerencanaanController@create')->name('admin.perencanaan.create');
     Route::post('/admin/menupelaporan/{id}/perencanaan/simpanperencanaan','PerencanaanController@store')->name('admin.perencanaan.store');
+    Route::post('/admin/menupelaporan/{id}/perencanaan/updateperencanaan/{id_perencanaan}','PerencanaanController@update')->name('admin.perencanaan.update');
 });
 Route::middleware('role:bappemas')->group(function (){
     Route::get('/bappemas','BappemasController@index')->name('bappemashome');
