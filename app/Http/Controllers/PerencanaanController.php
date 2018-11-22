@@ -26,10 +26,12 @@ class PerencanaanController extends Controller
         }
         else{
         $data2=DetailPerencanaanModel::where('id_perencanaan','=',$adadata->id)->get();
+        // $data3=DetailPerencanaanModel::where('id_perencanaan','=',$adadata->id)->pluck('tipe');
+
         foreach($data2 as $index => $dana){
             $total += $dana->perencanaan;
         }
-        return view('perencanaan/perencanaan',compact('data','adadata','data2','total'));
+        return view('perencanaan/perencanaan',compact('data','adadata','data2','total','dropdown'));
     }
     }
 
@@ -61,6 +63,22 @@ class PerencanaanController extends Controller
           $data2=new DetailPerencanaanModel;
           $dana[]=str_replace(".", "", $request->perencanaan[$i]);
           $data2->id_perencanaan=$data->id;
+          $data2->nama=$request->nama[$i];
+          $data2->perencanaan=$dana[$i];
+          $data2->tipe=$request->tipe[$i];
+          $data2->save();
+        }
+        Alert::success('Data berhasil ditambahkan', 'Sukses');
+        return redirect()->back();
+    }
+
+    public function store2($id, Request $request)
+    {
+        $adadata=PerencanaanModel::where('id_pelaporan','=',$id)->value('id');
+        for ($i=0; $i < count($request->nama); $i++) { 
+          $data2=new DetailPerencanaanModel;
+          $dana[]=str_replace(".", "", $request->perencanaan[$i]);
+          $data2->id_perencanaan=$adadata;
           $data2->nama=$request->nama[$i];
           $data2->perencanaan=$dana[$i];
           $data2->tipe=$request->tipe[$i];
@@ -108,6 +126,19 @@ class PerencanaanController extends Controller
         $data->total_penerimaan=$total;
         $data->sumber=$request->sumber;
         $data->save();
+        Alert::success('Data berhasil diperbaharui','Sukses');
+        return redirect()->back();
+    }
+
+    public function update2(Request $request, $id)
+    {
+        $data= DetailPerencanaanModel::find($id);
+        $dana=str_replace(".", "", $request->perencanaan);
+        $data->nama=$request->nama;
+        $data->perencanaan=$dana;
+        $data->tipe=$request->tipe;
+        $data->save();
+        Alert::success('Data berhasil diperbaharui','Sukses');
         return redirect()->back();
     }
 
@@ -119,6 +150,16 @@ class PerencanaanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data= PerencanaanModel::find($id);
+        $data->delete();
+        Alert::success('Data Perencanaan berhasil dihapus silahkan isi kembali form perencanaan', 'Sukses');
+        return redirect()->back();
+    }
+    public function destroy2($id)
+    {
+        $data= DetailPerencanaanModel::find($id);
+        $data->delete();
+        Alert::success('Data berhasil dihapus', 'Sukses');
+        return redirect()->back();
     }
 }

@@ -35,7 +35,11 @@ Route::middleware('role:operator')->group(function (){
     Route::get('/admin/menupelaporan/{id}/perencanaan','PerencanaanController@index')->name('admin.perencanaan');
     Route::get('/admin/menupelaporan/{id}/perencanaan/tambahperencanaan','PerencanaanController@create')->name('admin.perencanaan.create');
     Route::post('/admin/menupelaporan/{id}/perencanaan/simpanperencanaan','PerencanaanController@store')->name('admin.perencanaan.store');
+    Route::post('/admin/menupelaporan/{id}/perencanaan/simpandetailperencanaan','PerencanaanController@store2')->name('admin.perencanaan.store2');
     Route::post('/admin/menupelaporan/{id}/perencanaan/updateperencanaan/{id_perencanaan}','PerencanaanController@update')->name('admin.perencanaan.update');
+    Route::post('/admin/menupelaporan/{id}/perencanaan/updatedetailperencanaan/{id_perencanaan}','PerencanaanController@update2')->name('admin.perencanaan.update2');
+    Route::delete('/admin/hapuspelaporan/{id}/perencanaaan/hapusperencanaan/{id_perencanaan}','PerencanaanController@destroy')->name('admin.perencanaan.delete');
+    Route::delete('/admin/hapuspelaporan/{id}/perencanaaan/hapusdetailperencanaan/{id_perencanaan}','PerencanaanController@destroy2')->name('admin.perencanaan.delete2');
 });
 Route::middleware('role:bappemas')->group(function (){
     Route::get('/bappemas','BappemasController@index')->name('bappemashome');

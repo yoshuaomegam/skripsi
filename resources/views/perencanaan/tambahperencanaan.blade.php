@@ -21,7 +21,7 @@
                       <div>
                         <div class="input-group margin-bottom-sm">
                           <span class="input-group-addon">Rp.</span>
-                          {!! Form::text('total_penerimaan', null, ['class'=>'form-control','id'=>'total_penerimaan']) !!}
+                          {!! Form::text('total_penerimaan', null, ['class'=>'form-control','id'=>'total_penerimaan','required'=>'required']) !!}
                         </div>
                       </div>
                       <br>
@@ -33,7 +33,7 @@
                             <tr>  
                                 
                                 <td><label>Nama Perencanaan</label>
-                                    <input type="text" name="nama[]"  class="form-control name_list"></td>  
+                                    <input type="text" name="nama[]"  class="form-control name_list" required></td>  
                                 <td style="width:5px;vertical-align:middle;" rowspan="5"> <button type="button" name="add" id="add" class="form-control btn btn-success fa fa-plus-circle"></button></td>    
                             </tr>
                         <tr>
@@ -41,7 +41,7 @@
                                         <label>Dana Perencanaan</label>
                                         <div class="input-group margin-bottom-sm">
                                                 <span class="input-group-addon">Rp.</span>
-                                    <input type="text" id="perencanaan" name="perencanaan[]" class="form-control perencanaan_list" ></td>
+                                    <input type="text" id="perencanaan" name="perencanaan[]" class="form-control perencanaan_list" required></td>
                                         </div>
                                 </tr>
                         <tr> 
@@ -78,9 +78,9 @@
     var i=1;  
     $('#add').click(function(){  
          i++; 
-         var html='<tbody id="hapus'+i+'"><tr class="dynamic-added"><td><label>Nama Perencanaan</label><input type="text" name="nama[]"  class="form-control name_list"></td><td></td></tr><tr id="" class="dynamic-added"><td><label>Dana Perencanaan</label><div class="input-group margin-bottom-sm"><span class="input-group-addon">Rp.</span><input type="text" id="perencanaan2" name="perencanaan[]" class="form-control perencanaan_list" ></td></div><td><button type="button" name="remove" id="'+i+'" class="form-control btn btn-danger btn_remove fa fa-window-close" style="vertical-align:middle;" rowspan="5"></button></td></tr><tr><td><label>Tipe Perencanaan</label><select name="tipe[]" id="tipe" class="form-control tipe-list"><option value="">Tidak ada</option><option value="Pembangunan pemanfaatan dan pemeliharaan infrastruktur dan lingkungan desa">Pembangunan pemanfaatan dan pemeliharaan infrastruktur dan lingkungan desa</option><option value="Pembangunan pemanfaatan dan pemeliharaan sarana dan prasarana kesehatan">Pembangunan pemanfaatan dan pemeliharaan sarana dan prasarana kesehatan</option><option value="Pembangunan pemanfaatan dan pemeliharaan pendidikan dan kebudayaan">Pembangunan pemanfaatan dan pemeliharaan pendidikan dan kebudayaan</option><option value="Pembangunan pemanfaatan dan pemeliharaan ekonomi">Pembangunan pemanfaatan dan pemeliharaan ekonomi</option></select><td></td></tr></tbody>';
-         $('#dynamic_field').append(html);  
-         $('#perencanaan2').mask('000.000.000.000.000.000.000.000', {reverse: true});
+         var html='<tbody id="hapus'+i+'"><tr class="dynamic-added"><td><label>Nama Perencanaan</label><input type="text" name="nama[]"  class="form-control name_list" required></td><td></td></tr><tr id="" class="dynamic-added"><td><label>Dana Perencanaan</label><div class="input-group margin-bottom-sm"><span class="input-group-addon">Rp.</span><input type="text" id="rencana'+i+'" name="perencanaan[]" class="form-control perencanaan_list" required></td></div><td><button type="button" name="remove" id="'+i+'" class="form-control btn btn-danger btn_remove fa fa-window-close" style="vertical-align:middle;" rowspan="5"></button></td></tr><tr><td><label>Tipe Perencanaan</label><select name="tipe[]" id="tipe" class="form-control tipe-list"><option value="">Tidak ada</option><option value="Pembangunan pemanfaatan dan pemeliharaan infrastruktur dan lingkungan desa">Pembangunan pemanfaatan dan pemeliharaan infrastruktur dan lingkungan desa</option><option value="Pembangunan pemanfaatan dan pemeliharaan sarana dan prasarana kesehatan">Pembangunan pemanfaatan dan pemeliharaan sarana dan prasarana kesehatan</option><option value="Pembangunan pemanfaatan dan pemeliharaan pendidikan dan kebudayaan">Pembangunan pemanfaatan dan pemeliharaan pendidikan dan kebudayaan</option><option value="Pembangunan pemanfaatan dan pemeliharaan ekonomi">Pembangunan pemanfaatan dan pemeliharaan ekonomi</option></select><td></td></tr></tbody>';
+         $('#dynamic_field').append(html);     
+         $('#rencana'+i+'').mask('000.000.000.000.000.000.000.000', {reverse: true});
         });  
     $(document).on('click', '.btn_remove', function(){  
          var button_id = $(this).attr("id");   
@@ -137,6 +137,8 @@ $(document).ready(function(){
     $('#total_penerimaan').mask('000.000.000.000.000.000.000.000', {reverse: true});
 })
 </script>
-
+<script src="{{ asset('js/sweetalert.min.js') }}"></script>
+<!-- Include this after the sweet alert js file -->
+@include('sweet::alert')
 @stop
 
