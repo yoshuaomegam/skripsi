@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/pengujian1','Driver@create');
+Route::get('/pengujian2','Driver@store');
+Route::get('/pengujian3/{$id}','Driver@index');
 Route::get('/apbdesa', function () {
     return view('apbdesa');
 });
@@ -40,6 +43,16 @@ Route::middleware('role:operator')->group(function (){
     Route::post('/admin/menupelaporan/{id}/perencanaan/updatedetailperencanaan/{id_perencanaan}','PerencanaanController@update2')->name('admin.perencanaan.update2');
     Route::delete('/admin/hapuspelaporan/{id}/perencanaaan/hapusperencanaan/{id_perencanaan}','PerencanaanController@destroy')->name('admin.perencanaan.delete');
     Route::delete('/admin/hapuspelaporan/{id}/perencanaaan/hapusdetailperencanaan/{id_perencanaan}','PerencanaanController@destroy2')->name('admin.perencanaan.delete2');
+    Route::get('/admin/menupelaporan/{id}/apbdesa','APBDesaController@index')->name('admin.apbdesa');
+    Route::get('/admin/menupelaporan/{id}/apbdesa/pendapatan','PendapatanController@create')->name('admin.pendapatan.create');
+    Route::post('/admin/menupelaporan/{id}/pendapatan/simpanpendapatan','PendapatanController@store')->name('admin.pendapatan.store');
+    Route::get('/admin/menupelaporan/{id}/apbdesa/showpendapatan/{id_pendapatan}','PendapatanController@show')->name('admin.pendapatan.show');
+    Route::get('/admin/menupelaporan/{id}/apbdesa/editpendapatan/{id_pendapatan}','PendapatanController@edit')->name('admin.pendapatan.edit');
+    Route::get('/admin/menupelaporan/{id}/apbdesa/updatependapatan/{id_pendapatan}','PendapatanController@update')->name('admin.pendapatan.update');
+   
+    Route::post('/admin/menupelaporan/{id}/apbdesa/simpandetailpendapatan/{id_pendapatan}','PendapatanController@store2')->name('admin.pendapatan.store2');
+    Route::post('/admin/menupelaporan/{id}/apbdesa/updatependapatan/{id_pendapatan}/detail/{$id_detail}','PendapatanController@update2')->name('admin.pendapatan.update2');
+    Route::delete('/admin/menupelaporan/{id}/apbdesa/editpendapatan/{id_pendapatan}/hapusdetail/{$id_detail}','PendapatanController@destroy2')->name('admin.pendapatan.delete2');
 });
 Route::middleware('role:bappemas')->group(function (){
     Route::get('/bappemas','BappemasController@index')->name('bappemashome');

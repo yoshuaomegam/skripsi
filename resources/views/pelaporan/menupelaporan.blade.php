@@ -38,7 +38,7 @@
                       <div class="info-box bg-yellow">
                             <span class="info-box-icon"><i class="fa fa-files-o"></i></span>
                             <div class="info-box-content">
-                              <span class="info-box-text">APBDesa tahun {{$data->tahun_apbd}} </span>
+                              <span class="info-box-text"><a href="/admin/menupelaporan/{{$data->id}}/apbdesa" style="color:white;">APBDesa tahun {{$data->tahun_apbd}}</span>
                               <span class="info-box-number">41,410</span>
                               <!-- The progress section is optional -->
                               <div class="progress">
@@ -49,22 +49,6 @@
                               </span>
                             </div><!-- /.info-box-content -->
                           </div><!-- /.info-box -->
-
-                          <div class="info-box bg-green">
-                                <span class="info-box-icon"><i class="fa fa-area-chart"></i></span>
-                                <div class="info-box-content">
-                                  <span class="info-box-text">Monitoring Desa tahun {{$data->tahun_perencanaan}}</span>
-                                  <span class="info-box-number">41,410</span>
-                                  <!-- The progress section is optional -->
-                                  <div class="progress">
-                                    <div class="progress-bar" style="width: 100%"></div>
-                                  </div>
-                                  <span class="progress-description">
-                                    70% Increase in 30 Days
-                                  </span>
-                                </div><!-- /.info-box-content -->
-                              </div><!-- /.info-box -->
-      </div><!-- /.box -->
 
 @stop
 
