@@ -11,15 +11,26 @@
                     <div class="box-header with-border"><h3 class="box-title" style="margin-left: 15px;margin-bottom: 5px;" >APBDesa Tahun {{$data->tahun_apbd}}</h3>
                         <td><a href="/admin/menupelaporan/{{$data->id}}/apbdesa/pendapatan" class="btn btn-xs btn-success fa fa-plus"  title="tambah" style="position:absolute;right:20px;"></a></td>
                       </div>
+                      
                           <div class="box-body">
                               <div class="container" style="width: auto;">
+                                    @if (count($errors) > 0)
+                                    <div class="alert alert-danger">
+                                        <strong>Whoops!</strong> Ada yang salah<br><br> 
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                    </div>
+                              @endif
                                   <div class="form-group">
                                     {!! Form::model($data,['route'=>['admin.pendapatan.update', $data->id_pelaporan,$data->id],'method'=>'POST']) !!}
                                     <div class="form-group">
                                             {{ Form::label('name', 'Name') }}
-                                            <select class="form-control" name="nama" id="nama" data-url="{{ url('api/dropdown')}}">
+                                            <select class="form-control" name="nama" id="nama">
                                                 @foreach($dropdown as $key=>$drop)
-                                                <option value = "<?php echo $data->nama; ?>" 
+                                                <option value = "<?php echo $drop; ?>" 
                                                     <?php
                                                         if ($drop == $data->nama){
                                                             echo 'selected="selected"';
@@ -39,8 +50,9 @@
                                         </div>
                                         </div>
                             </div>
-                            {!! Form::close() !!}
-                            
+
+                            {{ Form::submit('Tambah',  array('class'=>'form-control btn btn-success'))}}     
+                            {!! Form::close() !!}  
                             <h3>Lampiran</h3>
                             <a href="#tambahmodal" class="btn btn-success" title="tambah" data-toggle="modal" data-target="#tambahmodal">Tambah Data Pendapatan</a>
                             <br>
@@ -51,8 +63,8 @@
                                         <th width="10">No</th>
                                         <th>File</th>
                                         <th>Deskripsi</th>
-                                        <th></th>
-                                        <th></th>
+                                        <th width="20"></th>
+                                        <th width="20"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -107,7 +119,8 @@
                             
                                 </tfoot>
                                 </table>
-                                            </div>
+
+                            </div>
                                         </div>
                                   </div>
                               </div>
@@ -265,29 +278,27 @@ $(document).ready(function(){
 })
 </script>
 <script>    
-    $('.btn-block').on('click', function(e) {
+    $('.btn-danger').on('click', function(e) {
         var form = e.target.form;
         e.preventDefault();
         swal({
-            title: "Apakah Anda yakin untuk menyimpan file ini?",
+            title: "Apakah Anda yakin untuk menghapus data ini?",
             // text: "Once deleted, you will not be able to recover this imaginary file!",
             icon: "warning",
             // buttons: true,
-            buttons: ["Batal", "Simpan"],
+            buttons: ["Batal", "Hapus"],
             dangerMode: true,
-            
-            
         })
         .then((willDelete) => {
             if (willDelete) {
-  
                 this.form.submit();
             } else {
                 swal("Dibatalkan");
             } 
         });
         }); 
-  </script>
+</script>
+
 
       <script src="{{ asset('js/sweetalert.min.js') }}"></script>
   <!-- Include this after the sweet alert js file -->

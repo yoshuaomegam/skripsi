@@ -41,7 +41,11 @@
                                     <td>Rp. {{number_format($pendapatan->pendapatan,0,",",".")}}</td>
                                     <td><a href="/admin/menupelaporan/{{$data->id}}/apbdesa/showpendapatan/{{$pendapatan->id}}" class="btn btn-xs btn-success fa fa-info"  title="detail" ></td>
                                     <td><a href="/admin/menupelaporan/{{$data->id}}/apbdesa/editpendapatan/{{$pendapatan->id}}" class="btn btn-xs btn-success fa fa-edit"  title="edit" ></td>
-                                    <td></td>
+                                        <td>
+                                                {!! Form::model($data,['route'=>['admin.pendapatan.delete', $data->id, $pendapatan->id],'method'=>'DELETE', 'id'=>'form']) !!}
+                                               {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', array('type'=>'submit','class'=>'btn btn-xs btn-danger', 'rel'=>'tooltip', 'title'=>'Hapus')) !!}
+                                               {!! Form::close() !!}
+                                         </td>       
                                 </tr>
                                 
                                 
@@ -73,7 +77,7 @@
     $('#pelaporan').dataTable( {
         "columnDefs": [
             { "orderable": false, 
-            "targets": [4,5],
+            "targets": [4,5,3],
          }
           ]
       } );
