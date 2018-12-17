@@ -13,7 +13,19 @@ class Pembiayaan extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('pembiayaan', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('id_pelaporan')->unsigned();
+            $table->string('nama');
+            $table->string('pembiayaan');
+            $table->timestamps();
+            
+            $table->foreign('id_pelaporan')
+            ->references('id')
+            ->on('pelaporan')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+        });
     }
 
     /**

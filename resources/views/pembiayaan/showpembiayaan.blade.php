@@ -10,13 +10,13 @@
 @section('content')
 <div class="box box-info">
         <div class="box-header with-border"><h3 class="box-title" style="margin-left: 15px;margin-bottom: 5px;" >APBDesa Tahun {{$data->tahun_apbd}}</h3>
-            
+           
           </div>
               <div class="box-body">
                   <div class="container" style="width: auto;">
                       <div class="form-group">
-                          <h3>Nama Pendapatan : {{$data->nama}}</h3>
-                          <h3>Pendapatan : {{$data->pendapatan}} </h3>
+                          <h3>Nama Pembiayaan : {{$data->nama}}</h3>
+                          <h3>Pembiayaan : {{$data->pembiayaan}} </h3>
                           <hr>
                             <h3>Lampiran</h3>
                             <table id="pelaporan"  class="table table-striped table-bordered" style="width:100%">

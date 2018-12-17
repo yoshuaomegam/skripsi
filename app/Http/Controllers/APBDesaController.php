@@ -7,6 +7,8 @@ use App\PelaporanModel;
 use App\PendapatanModel;
 use App\DetailPendapatanModel;
 use App\DesaModel;
+use App\PembiayaanModel;
+use App\DetailPembiayaanModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 class APBDesaController extends Controller
@@ -20,16 +22,21 @@ class APBDesaController extends Controller
     {
         $total=0;
         $data=PelaporanModel::find($id);
-        $id_operator = Auth::id();
-        $id_desa=DesaModel::where('id_operator','=',$id_operator)->value('id');
-        $id_pelaporan=PelaporanModel::where('id_desa','=',$id_desa)->value('id');
         $data2=PendapatanModel::with('daftar_lampiran')->where('id_pelaporan','=',$id)->get();
-        
-        $id_pendapatan=PendapatanModel::select('id')->where('id_pelaporan','=',$id_pelaporan)->get()->pluck('id')->toArray();
+        $id_pendapatan=PendapatanModel::select('id')->where('id_pelaporan','=',$id)->get()->pluck('id')->toArray();
         foreach($data2 as $index => $dana){
             $total += $dana->pendapatan;
         }
-        return view('apbdesa/apbdesa',compact('data','data2','total','data3'));
+        $totpenerimaan=0;
+        $totpengeluaran=0;
+        $data3=PembiayaanModel::where('id_pelaporan','=',$id)->get();
+        $namapenerimaan=["Sisa lebih perhitungan anggaran (SILPA) tahun sebelumnya","Pencairan dana cadangan","Hasil penjualan kekayaan desa yang dipisahkan"];
+        $namapengeluaran=["Pembentukan dana cadangan","Penyertaan modal desa"];
+        $totalpenerimaan=PembiayaanModel::where('id_pelaporan','=',$id)
+        ->whereIn('nama', $namapenerimaan)->sum('pembiayaan');
+        $totalpengeluaran=PembiayaanModel::where('id_pelaporan','=',$id)
+        ->whereIn('nama', $namapengeluaran)->sum('pembiayaan');
+        return view('apbdesa/apbdesa',compact('data','data2','total','data3','totalpenerimaan','totalpengeluaran'));
     }
 
     /**

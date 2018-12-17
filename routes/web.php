@@ -45,14 +45,25 @@ Route::middleware('role:operator')->group(function (){
     Route::delete('/admin/hapuspelaporan/{id}/perencanaaan/hapusdetailperencanaan/{id_perencanaan}','PerencanaanController@destroy2')->name('admin.perencanaan.delete2');
     Route::get('/admin/menupelaporan/{id}/apbdesa','APBDesaController@index')->name('admin.apbdesa');
     Route::get('/admin/menupelaporan/{id}/apbdesa/pendapatan','PendapatanController@create')->name('admin.pendapatan.create');
-    Route::post('/admin/menupelaporan/{id}/pendapatan/simpanpendapatan','PendapatanController@store')->name('admin.pendapatan.store');
+    Route::post('/admin/menupelaporan/{id}/apbdesa/simpanpendapatan','PendapatanController@store')->name('admin.pendapatan.store');
     Route::get('/admin/menupelaporan/{id}/apbdesa/showpendapatan/{id_pendapatan}','PendapatanController@show')->name('admin.pendapatan.show');
     Route::get('/admin/menupelaporan/{id}/apbdesa/editpendapatan/{id_pendapatan}','PendapatanController@edit')->name('admin.pendapatan.edit');
     Route::post('/admin/menupelaporan/{id}/apbdesa/updatependapatan/{id_pendapatan}','PendapatanController@update')->name('admin.pendapatan.update');
     Route::delete('/admin/menupelaporan/{id}/apbdesa/hapuspendapatan/{id_pendapatan}','PendapatanController@destroy')->name('admin.pendapatan.delete');
     Route::post('/admin/menupelaporan/{id}/apbdesa/simpandetailpendapatan/{id_pendapatan}','PendapatanController@store2')->name('admin.pendapatan.store2');
     Route::post('/admin/menupelaporan/{id}/apbdesa/updatependapatan/{id_pendapatan}/updatedetail/{id_detail}','PendapatanController@update2')->name('admin.pendapatan.update2');
-    Route::delete('/admin/menupelaporan/{id}/apbdesa/editpendapatan/{id_pendapatan}/hapusdetail/{id_detail}','PendapatanController@destroy2')->name('admin.pendapatan.delete2');
+    Route::delete('/admin/menupelaporan/{id}/apbdesa/updatependapatan/{id_pendapatan}/hapusdetail/{id_detail}','PendapatanController@destroy2')->name('admin.pendapatan.delete2');
+    
+    Route::get('/admin/menupelaporan/{id}/apbdesa/pembiayaan','PembiayaanController@create')->name('admin.pembiayaan.create');
+    Route::post('/admin/menupelaporan/{id}/apbdesa/simpanpembiayaan','PembiayaanController@store')->name('admin.pembiayaan.store');
+    Route::get('/admin/menupelaporan/{id}/apbdesa/showpembiayaan/{id_pembiayaan}','PembiayaanController@show')->name('admin.pembiayaan.show');
+    Route::get('/admin/menupelaporan/{id}/apbdesa/editpembiayaan/{id_pembiayaan}','PembiayaanController@edit')->name('admin.pembiayaan.edit');
+    Route::post('/admin/menupelaporan/{id}/apbdesa/updatepembiayaan/{id_pembiayaan}','PembiayaanController@update')->name('admin.pembiayaan.update');
+    Route::post('/admin/menupelaporan/{id}/apbdesa/simpandetailpembiayaan/{id_pembiayaan}','PembiayaanController@store2')->name('admin.pembiayaan.store2');
+    Route::post('/admin/menupelaporan/{id}/apbdesa/updatepembiayaan/{id_pembiayaan}/updatedetail/{id_detail}','PembiayaanController@update2')->name('admin.pembiayaan.update2');
+    Route::delete('/admin/menupelaporan/{id}/apbdesa/updatepembiayaan/{id_pembiayaan}/hapusdetail/{id_detail}','PembiayaanController@destroy2')->name('admin.pembiayaan.delete2');
+    Route::delete('/admin/menupelaporan/{id}/apbdesa/hapuspembiayaan/{id_pembiayaan}','PembiayaanController@destroy')->name('admin.pembiayaan.delete');
+    
 });
 Route::middleware('role:bappemas')->group(function (){
     Route::get('/bappemas','BappemasController@index')->name('bappemashome');

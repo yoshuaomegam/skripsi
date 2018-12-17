@@ -13,7 +13,19 @@ class DetailPembiayaan extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('detail_pembiayaan', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('id_pembiayaan')->unsigned();
+            $table->string('file')->nullable();
+            $table->string('deskripsi')->nullable();
+            $table->timestamps();
+    
+            $table->foreign('id_pembiayaan')
+            ->references('id')
+            ->on('pembiayaan')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+        });
     }
 
     /**
