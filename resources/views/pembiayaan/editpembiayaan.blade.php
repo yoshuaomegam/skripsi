@@ -9,7 +9,7 @@
 @section('content')  
                 <div class="box box-info">
                     <div class="box-header with-border"><h3 class="box-title" style="margin-left: 15px;margin-bottom: 5px;" >APBDesa Tahun {{$data->tahun_apbd}}</h3>
-                        <td><a href="/admin/menupelaporan/{{$data->id}}/apbdesa/pembiayaan" class="btn btn-xs btn-success fa fa-plus"  title="tambah" style="position:absolute;right:20px;"></a></td>
+                        
                       </div>
                       
                           <div class="box-body">

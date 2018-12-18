@@ -63,7 +63,17 @@ Route::middleware('role:operator')->group(function (){
     Route::post('/admin/menupelaporan/{id}/apbdesa/updatepembiayaan/{id_pembiayaan}/updatedetail/{id_detail}','PembiayaanController@update2')->name('admin.pembiayaan.update2');
     Route::delete('/admin/menupelaporan/{id}/apbdesa/updatepembiayaan/{id_pembiayaan}/hapusdetail/{id_detail}','PembiayaanController@destroy2')->name('admin.pembiayaan.delete2');
     Route::delete('/admin/menupelaporan/{id}/apbdesa/hapuspembiayaan/{id_pembiayaan}','PembiayaanController@destroy')->name('admin.pembiayaan.delete');
-    
+
+    Route::get('/admin/menupelaporan/{id}/apbdesa/belanja','BelanjaController@create')->name('admin.belanja.create');
+    Route::post('/admin/menupelaporan/{id}/apbdesa/simpanbelanja','BelanjaController@store')->name('admin.belanja.store');
+    Route::get('/admin/menupelaporan/{id}/apbdesa/showbelanja/{id_belanja}','BelanjaController@show')->name('admin.belanja.show');
+    Route::get('/admin/menupelaporan/{id}/apbdesa/editbelanja/{id_belanja}','BelanjaController@edit')->name('admin.belanja.edit');
+    Route::post('/admin/menupelaporan/{id}/apbdesa/updatebelanja/{id_belanja}','BelanjaController@update')->name('admin.belanja.update');
+    Route::delete('/admin/menupelaporan/{id}/apbdesa/hapusbelanja/{id_belanja}','BelanjaController@destroy')->name('admin.belanja.delete');
+    Route::post('/admin/menupelaporan/{id}/apbdesa/simpandetailbelanja/{id_belanja}','BelanjaController@store2')->name('admin.belanja.store2');
+    Route::post('/admin/menupelaporan/{id}/apbdesa/updatebelanja/{id_belanja}/updatedetail/{id_detail}','BelanjaController@update2')->name('admin.belanja.update2');
+    Route::delete('/admin/menupelaporan/{id}/apbdesa/updatebelanja/{id_belanja}/hapusdetail/{id_detail}','BelanjaController@destroy2')->name('admin.belanja.delete2');
+
 });
 Route::middleware('role:bappemas')->group(function (){
     Route::get('/bappemas','BappemasController@index')->name('bappemashome');

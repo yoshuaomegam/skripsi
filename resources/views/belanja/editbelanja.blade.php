@@ -9,7 +9,7 @@
 @section('content')  
                 <div class="box box-info">
                     <div class="box-header with-border"><h3 class="box-title" style="margin-left: 15px;margin-bottom: 5px;" >APBDesa Tahun {{$data->tahun_apbd}}</h3>
-                       
+                        
                       </div>
                       
                           <div class="box-body">
@@ -25,36 +25,37 @@
                                     </div>
                               @endif
                                   <div class="form-group">
-                                    {!! Form::model($data,['route'=>['admin.pendapatan.update', $data->id_pelaporan,$data->id],'method'=>'POST']) !!}
+                                    {!! Form::model($data,['route'=>['admin.belanja.update', $data->id_pelaporan,$data->id],'method'=>'POST']) !!}
                                     <div class="form-group">
-                                            {{ Form::label('name', 'Name') }}
-                                            <select class="form-control" name="nama" id="nama">
-                                                @foreach($dropdown as $key=>$drop)
-                                                <option value = "<?php echo $drop; ?>" 
-                                                    <?php
-                                                        if ($drop == $data->nama){
-                                                            echo 'selected="selected"';
-                                                        } 
-                                                    ?> >
-                                                    <?php echo $drop; ?> 
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                        {!! Form::label('title', 'Nama Belanja') !!}
+                                        {!! Form::text('nama', old('nama'), ['class'=>'form-control','id'=>'nama','required'=>'required']) !!}
                                         </div>
-                                    
                                         <div class="form-group">
-                                            {{ Form::label('Pendapatan', 'Pendapatan') }}
+                                            {{ Form::label('Belanja', 'Belanja') }}
                                             <div class="input-group margin-bottom-sm">
                                                 <span class="input-group-addon">Rp.</span>
-                                    <input type="text" id="pendapatan" name="pendapatan" value="{{$data->pendapatan}}" class="form-control perencanaan_list" required></td>
+                                    <input type="text" id="belanja" name="belanja" value="{{$data->belanja}}" class="form-control perencanaan_list" required></td>
                                         </div>
                                         </div>
+                                        {!! Form::label('title', 'Tipe Belanja') !!}
+                                        <select class="form-control" name="nama" id="nama">
+                                            @foreach($dropdown as $key=>$drop)
+                                            <option value = "<?php echo $drop; ?>" 
+                                                <?php
+                                                    if ($drop == $data->tipe){
+                                                        echo 'selected="selected"';
+                                                    } 
+                                                ?> >
+                                                <?php echo $drop; ?> 
+                                                </option>
+                                            @endforeach
+                                        </select>
                             </div>
 
                             {{ Form::submit('Tambah',  array('class'=>'form-control btn btn-success'))}}     
                             {!! Form::close() !!}  
                             <h3>Lampiran</h3>
-                            <a href="#tambahmodal" class="btn btn-success" title="tambah" data-toggle="modal" data-target="#tambahmodal">Tambah Data Pendapatan</a>
+                            <a href="#tambahmodal" class="btn btn-success" title="tambah" data-toggle="modal" data-target="#tambahmodal">Tambah Data Belanja</a>
                             <br>
                             <br>
                             <table id="pelaporan"  class="table table-striped table-bordered" style="width:100%">
@@ -81,7 +82,7 @@
                         @endif</td>
                         <td><a href="#editdetail" class="btn btn-xs btn-success fa fa-edit" title="edit" data-toggle="modal" data-target="#editdetail{{$detail->id}}"></a></td></td>
                         <td>
-                            {!! Form::model($detail,['route'=>['admin.pendapatan.delete2', $data->id_pelaporan, $detail->id_pendapatan, $detail->id],'method'=>'DELETE', 'id'=>'form']) !!}
+                            {!! Form::model($detail,['route'=>['admin.belanja.delete2', $data->id_pelaporan, $detail->id_belanja, $detail->id],'method'=>'DELETE', 'id'=>'form']) !!}
                            {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', array('type'=>'submit','class'=>'btn btn-xs btn-danger', 'rel'=>'tooltip', 'title'=>'Hapus')) !!}
                            {!! Form::close() !!}
                      </td>       
@@ -98,7 +99,7 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                  {!! Form::model($detail,['route'=>['admin.pendapatan.update2', $data->id_pelaporan,$data->id,$detail->id],'files'=>true]) !!} 
+                                  {!! Form::model($detail,['route'=>['admin.belanja.update2', $data->id_pelaporan,$data->id,$detail->id],'files'=>true]) !!} 
 
                                   {{ Form::label('title','Deskripsi') }}
                                   {{ Form::text('deskripsi', NULL, array('class'=>'form-control'))}}
@@ -131,13 +132,13 @@
                                 <div class="modal-dialog" role="document">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h2 class="modal-title" id="tambahmodalLabel">Tambah File Pendapatan</h2>
+                                      <h2 class="modal-title" id="tambahmodalLabel">Tambah File Belanja</h2>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
                                     <div class="modal-body">
-                                        {!! Form::open(array('route'=>['admin.pendapatan.store2','id' => $data->id_pelaporan,'id_pendapatan'=>$data->id],'data-parsley-validate'=>'','files'=>true)) !!}
+                                        {!! Form::open(array('route'=>['admin.belanja.store2','id' => $data->id_pelaporan,'id_belanja'=>$data->id],'data-parsley-validate'=>'','files'=>true)) !!}
 
                                                                                           <table class="table table-bordered" id="dynamic_field">  
                                                                                               <td>File</td>
@@ -274,7 +275,7 @@
 </script>
 <script>
 $(document).ready(function(){
-    $('#pendapatan').mask('000.000.000.000.000.000.000.000', {reverse: true});
+    $('#belanja').mask('000.000.000.000.000.000.000.000', {reverse: true});
 })
 </script>
 <script>    

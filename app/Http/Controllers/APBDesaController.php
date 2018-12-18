@@ -9,6 +9,8 @@ use App\DetailPendapatanModel;
 use App\DesaModel;
 use App\PembiayaanModel;
 use App\DetailPembiayaanModel;
+use App\BelanjaModel;
+use App\DetailBelanjaModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 class APBDesaController extends Controller
@@ -21,6 +23,7 @@ class APBDesaController extends Controller
     public function index($id)
     {
         $total=0;
+        $total2=0;
         $data=PelaporanModel::find($id);
         $data2=PendapatanModel::with('daftar_lampiran')->where('id_pelaporan','=',$id)->get();
         $id_pendapatan=PendapatanModel::select('id')->where('id_pelaporan','=',$id)->get()->pluck('id')->toArray();
@@ -36,7 +39,11 @@ class APBDesaController extends Controller
         ->whereIn('nama', $namapenerimaan)->sum('pembiayaan');
         $totalpengeluaran=PembiayaanModel::where('id_pelaporan','=',$id)
         ->whereIn('nama', $namapengeluaran)->sum('pembiayaan');
-        return view('apbdesa/apbdesa',compact('data','data2','total','data3','totalpenerimaan','totalpengeluaran'));
+        $data4=BelanjaModel::where('id_pelaporan','=',$id)->get();
+        foreach($data4 as $index => $dana){
+            $total2 += $dana->belanja;
+        }
+        return view('apbdesa/apbdesa',compact('data','data2','total','data3','totalpenerimaan','totalpengeluaran','total2','data4'));
     }
 
     /**
